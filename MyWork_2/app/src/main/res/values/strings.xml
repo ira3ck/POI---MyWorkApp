@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MyWork</string>
+    <string name="mes_placeholder">Escribe tu mensaje...</string>
+    <string name="mes_sender">ira3ck</string>
+    <string name="mes_content">Hola qué tal, nada más que decir.Hola qué tal, nada más que decir.Hola qué tal, nada más que decir.Hola qué tal, nada más que decir.</string>
+    <string name="mes_time">4:00 pm</string>
+    <string name="send_access">Enviar</string>
+
+    <string name="hint_mensaje">Envía tu mensaje</string>
+    <string name="hint_files_BTN">Botón Archivos</string>
+    <string name="hint_posts_BTN">Botón Publicaciones</string>
+    <string name="hint_add_BTN">Botón Agregar</string>
+    <string name="hint_chat_BTN">Botón Chat</string>
+    <string name="hint_tasks_BTN">Botón Tareas</string>
+
+    <string name="img_desc">Fotografía de perfil</string>
+    <string name="icon_desc_folder">Ícono de carpeta</string>
+
+    <string name="prev_post_author">ira3ck</string>
+    <string name="prev_post_author_rank">Administrador - Estudiante</string>
+    <string name="prev_post_title">Nuevos Post todos los días.</string>
+    <string name="prev_post_content">Así es, todos los días post nuevos en esta su plataforma. Tan solo es cuestión de entrar y leerlas amigos, muy útil y muy practico para todos.</string>
+
+    <string name="file_name">Carpeta contenedora</string>
+    <string name="file_created">Creada por: ira3ck</string>
+
+    <string name="profile_name">ira3ck alanís</string>
+    <string name="profile_rank">Estudiante</string>
+
+    <string name="salon_name">POI - Programación Orientada a Internet</string>
+    <string name="salon_percentage">41.3%</string>
+
+    <string name="task_name">Primera Entrega Primera Entrega Primera Entrega</string>
+    <string name="task_percentage">41.3%</string>
+    <string name="task_due_date">04/03/2021</string>
+</resources>

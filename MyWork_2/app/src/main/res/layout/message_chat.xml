@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/incomming_message"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/mesSender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mes_sender"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mesContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="@string/mes_content" />
+
+    <TextView
+        android:id="@+id/mesTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/mes_time"
+        android:textSize="12sp" />
+</LinearLayout>
+
