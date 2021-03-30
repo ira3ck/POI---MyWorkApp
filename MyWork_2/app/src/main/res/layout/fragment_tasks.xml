@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#9C27B0"
+        android:background="#336A99"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -22,7 +22,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="@string/salon_name"
-            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -41,6 +42,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/salon_percentage"
+            android:textColor="#FFFFFF"
             android:textSize="60sp" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/profile_rank"
-            android:textSize="18sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView7"
@@ -72,12 +75,13 @@
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:text="@string/profile_name"
+            android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="250dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
@@ -107,6 +111,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_horizontal"
                 android:text="Tarea 1"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <ImageView
