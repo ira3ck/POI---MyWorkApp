@@ -73,7 +73,9 @@ class ChatActivity : AppCompatActivity() {
                     var contenido = sp.child("contenido").getValue()
                     var fecha = sp.child("timestamp").getValue()
                     var id = sp.child("id").getValue()
-                    listaMensaje.add(Mensaje(id.toString(), contenido.toString(), de.toString(), fecha))
+                    var Mes = Mensaje(id.toString(), contenido.toString(), de.toString(), fecha)
+                    Mes.mine = Mes.de == username
+                    listaMensaje.add(Mes)
                 }
 
                 if (listaMensaje.size > 0){
