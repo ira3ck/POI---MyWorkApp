@@ -1,5 +1,6 @@
 package com.i3k.mywork
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.media.VolumeShaper
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.regis)
+        setContentView(R.layout.activity_main)
 
-        val registrarseBTN = findViewById<Button>(R.id.regisBTN2)
+        /*val registrarseBTN = findViewById<Button>(R.id.regisBTN2)
 
         val usuarioText = findViewById<TextView>(R.id.usernameTB2)
         val contraText = findViewById<TextView>(R.id.passwordTB2)
@@ -54,6 +55,21 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
             }
 
+        }
+        */
+
+        findViewById<Button>(R.id.btnEntrar).setOnClickListener {
+
+            val nombreUsuario = findViewById<TextView>(R.id.txtUsuario).text.toString()
+
+            if(nombreUsuario.isEmpty()){
+                Toast.makeText(this,"Falta usuario", Toast.LENGTH_SHORT).show()
+            } else{
+                val intentChat = Intent(this,ChatActivity::class.java)
+                intentChat.putExtra("nombreUsuario", nombreUsuario)
+
+                startActivity(intentChat)
+            }
         }
         
     }
