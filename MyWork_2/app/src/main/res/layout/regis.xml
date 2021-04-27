@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
 
     <Button
         android:id="@+id/regisBTN2"
@@ -19,16 +20,31 @@
         android:id="@+id/passwordTB2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/message_container"
         android:ems="10"
         android:hint="@string/hint_password_BTN"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordTB3"
+        app:layout_constraintEnd_toEndOf="@+id/passwordTB3"
+        app:layout_constraintStart_toStartOf="@+id/passwordTB3" />
+
+    <EditText
+        android:id="@+id/passwordTB3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/message_container"
+        android:ems="10"
+        android:hint="@string/hint_confirm_pass_BTN"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/regisBTN2"
+        app:layout_constraintStart_toStartOf="@+id/regisBTN2" />
 
     <EditText
         android:id="@+id/usernameTB2"

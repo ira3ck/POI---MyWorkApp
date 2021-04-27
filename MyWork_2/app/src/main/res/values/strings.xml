@@ -14,6 +14,9 @@
     <string name="hint_tasks_BTN">Botón Tareas</string>
     <string name="hint_username_BTN">Nombre de Usuario</string>
     <string name="hint_password_BTN">Contraseña</string>
+    <string name="hint_confirm_pass_BTN">Confirmar Contraseña</string>
+    <string name="hint_user_to_chat">Busca una persona</string>
+    <string name="hint_type">Escribe tu mensaje...</string>
 
     <string name="img_desc">Fotografía de perfil</string>
     <string name="icon_desc_folder">Ícono de carpeta</string>

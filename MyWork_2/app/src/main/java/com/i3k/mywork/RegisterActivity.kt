@@ -1,7 +1,5 @@
 package com.i3k.mywork
 
-import android.content.Context
-import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.media.VolumeShaper
@@ -18,77 +16,56 @@ import com.google.firebase.database.ValueEventListener
 import com.i3k.mywork.modelos.User
 
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     val database = FirebaseDatabase.getInstance()
     val usersRef = database.getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.in_ses)
+        setContentView(R.layout.regis)
 
-        val registrarseBTN = findViewById<Button>(R.id.regisBTN)
-        val iniciarBTN = findViewById<Button>(R.id.inSesBTN)
+        val registrarseBTN = findViewById<Button>(R.id.regisBTN2)
 
-        val usuarioText = findViewById<TextView>(R.id.usernameTB)
-        val contraText = findViewById<TextView>(R.id.passwordTB)
+        val usuarioText = findViewById<TextView>(R.id.usernameTB2)
+        val contraText = findViewById<TextView>(R.id.passwordTB2)
+        val confContraText = findViewById<TextView>(R.id.passwordTB3)
 
         val contexto = this
+
         var correcto = true
-        val listaErrores = arrayOf("Introduzca un nombre de usuario. ", "Introduzca una contraseña. ", "Usuario o Contraseña incorrecta. ", "Estamos experimentando con problemas en la Base de Datos. ")
+        val listaErrores = arrayOf("Introduzca un nombre de usuario. ", "Introduzca una contraseña. ", "Este nombre de usuario ya está en uso. ", "Estamos experimentando con problemas en la Base de Datos. ", "Las contraseñas no coinciden")
         var errorTxt = ""
 
         //Esto es para revisar si está en modo nocturno
         if(resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES){
             usuarioText.setBackgroundResource(R.drawable.message_container_dark)
             contraText.setBackgroundResource(R.drawable.message_container_dark)
+            confContraText.setBackgroundResource(R.drawable.message_container_dark)
         }
 
         registrarseBTN.setOnClickListener {
-            val intentChat = Intent(this, RegisterActivity::class.java)
-            //intentChat.putExtra("nombreUsuario", nombreUsuario)
-
-            startActivity(intentChat)
-        }
-
-        var userID = "";
-
-        iniciarBTN.setOnClickListener {
-
-            errorTxt = listaErrores[2]
-            correcto = true
             val text1 = usuarioText.text.toString()
             val text2 = contraText.text.toString()
+            val text3 = confContraText.text.toString()
+            correcto = true
 
             val usuarios = usersRef.orderByChild("username").equalTo(text1)
             val valueEventListener = object : ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (ds in snapshot.children){
-                        val userAdecuado = ds.child("username").getValue(String::class.java)
-                        val passAdecuado = ds.child("password").getValue(String::class.java)
-                        val ayDi = ds.child("id").getValue(String::class.java)
-
-                        if (userAdecuado.equals(text1) && passAdecuado.equals(text2)){
-
-                            userID = ayDi.toString()
-                            correcto = true
-                            errorTxt = ""
-
-                            val intent = Intent(this@MainActivity, SalonActivity::class.java)
-
-                            intent.putExtra("username", userAdecuado.toString())
-                            intent.putExtra("userID", userID)
-
-                            startActivity(intent)
-
+                        val repetido = ds.child("username").getValue(String::class.java)
+                        if (repetido.equals(text1)){
+                            errorTxt += listaErrores[2]
+                            correcto = false
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     errorTxt += listaErrores[3]
-                    //correcto = false
+                    correcto = false
                 }
             }
             usuarios.addListenerForSingleValueEvent(valueEventListener)
@@ -96,24 +73,38 @@ class MainActivity : AppCompatActivity() {
 
             if (text1.isEmpty()){
                 errorTxt += listaErrores[0];
-                correcto = false
+                correcto = false;
             }
 
             if(text2.isEmpty()){
                 errorTxt += listaErrores[1]
-                correcto = false
+                correcto = false;
             }
 
+            if(!text2.equals(text3)){
+                errorTxt += listaErrores[4]
+                correcto = false;
+            }
+
+            registrarUsuario(User("", text1, text2))
 
             /*if(!correcto){
                 Toast.makeText(this, errorTxt, Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                registrarUsuario(User("", text1, text2))
+                Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
             }*/
+
+            errorTxt = ""
 
         }
 
     }
 
+    private fun registrarUsuario(usuario : User){
+        val regisUser = usersRef.push()
+        usuario.id = regisUser.key ?: ""
+        regisUser.setValue(usuario)
+    }
 }
