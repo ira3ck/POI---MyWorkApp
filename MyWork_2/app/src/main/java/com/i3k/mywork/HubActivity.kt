@@ -19,6 +19,8 @@ class HubActivity : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
     val usersRef = database.getReference("users")
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hub)
@@ -35,6 +37,7 @@ class HubActivity : AppCompatActivity() {
         if(resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES){
             personaHablar.setBackgroundResource(R.drawable.message_container_dark)
         }
+
 
         unoBTN.setOnClickListener{
             var text1 = personaHablar.text.toString()
@@ -74,6 +77,14 @@ class HubActivity : AppCompatActivity() {
 
         todosBTN.setOnClickListener {
 
+            val intent = Intent(this, ChatActivity::class.java)
+            intent.putExtra("username", username)
+            intent.putExtra("userID", userID)
+            intent.putExtra("username2", "")
+            intent.putExtra("userID2", "")
+            intent.putExtra("modo", "todo")
+
+            startActivity(intent)
         }
     }
 

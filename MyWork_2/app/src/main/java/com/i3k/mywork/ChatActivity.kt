@@ -18,6 +18,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var userID: String
     private lateinit var username2: String
     private lateinit var userID2: String
+    private lateinit var modo: String
 
     private val listaMensaje = mutableListOf<Mensaje>()
     private lateinit var adaptador : ChatAdapter
@@ -33,13 +34,23 @@ class ChatActivity : AppCompatActivity() {
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
         username2 = intent.getStringExtra("username2") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID2 = intent.getStringExtra("userID2") ?: "AAAAAAAAAAAAAAAAAAAA"
-
-        var uniqueChatRef = mutableListOf(userID, userID2)
-        uniqueChatRef.sort()
-        chatsRef = database.getReference("chats/"+uniqueChatRef[0]+uniqueChatRef[1])
+        modo = intent.getStringExtra("modo") ?: "AAAAAAAAAAAAAAAAAAAA"
 
         var idText = findViewById<TextView>(R.id.idUserText)
-        idText.text = username2
+
+        if (modo.equals("solo")){
+            var uniqueChatRef = mutableListOf(userID, userID2)
+            uniqueChatRef.sort()
+            chatsRef = database.getReference("chats/"+uniqueChatRef[0]+uniqueChatRef[1])
+
+            idText.text = username2
+        }
+        else {
+            chatsRef = database.getReference("chats/theWorld")
+
+            idText.text = "Todos"
+        }
+
 
 
         val recyclerView :RecyclerView = findViewById(R.id.chatRV)
