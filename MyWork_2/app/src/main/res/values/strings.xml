@@ -12,6 +12,8 @@
     <string name="hint_add_BTN">Botón Agregar</string>
     <string name="hint_chat_BTN">Botón Chat</string>
     <string name="hint_tasks_BTN">Botón Tareas</string>
+    <string name="hint_username_BTN">Nombre de Usuario</string>
+    <string name="hint_password_BTN">Contraseña</string>
 
     <string name="img_desc">Fotografía de perfil</string>
     <string name="icon_desc_folder">Ícono de carpeta</string>
@@ -33,4 +35,9 @@
     <string name="task_name">Primera Entrega Primera Entrega Primera Entrega</string>
     <string name="task_percentage">41.3%</string>
     <string name="task_due_date">04/03/2021</string>
+
+    <string name="in_ses_BTN">Iniciar Sesión</string>
+    <string name="regis_BTN">Registrarse</string>
+    <string name="no_cuenta">¿No tienes una cuenta?</string>
+
 </resources>
