@@ -13,6 +13,7 @@
         <activity android:name=".ChatActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ContactsActivity" />
+        <activity android:name=".MostrarActivity" />
         <activity android:name=".HubActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

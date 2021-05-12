@@ -1,7 +1,6 @@
 package com.i3k.mywork
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +10,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.i3k.mywork.adaptadores.ContactAdapter
 import com.i3k.mywork.modelos.Contact
-import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.contactos.*
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -29,14 +26,14 @@ class ContactsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.contactos)
+        setContentView(R.layout.fragment_contacts)
 
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
 
         val recyclerView : RecyclerView = findViewById(R.id.ContactsRV)
 
-        adaptador = ContactAdapter(listaContactos)
+        //adaptador = ContactAdapter(listaContactos)
 
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager

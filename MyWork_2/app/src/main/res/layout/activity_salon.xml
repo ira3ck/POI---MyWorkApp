@@ -7,6 +7,81 @@
     android:background="#FFFFFF"
     tools:context=".SalonActivity">
 
+    <FrameLayout
+        android:id="@+id/salon_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreSalonTV">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/actionBarDown"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#336A99"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/postsBTN"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="@string/hint_posts_BTN"
+                app:srcCompat="@drawable/ic_baseline_list_alt_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/filesBTN"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="@string/hint_files_BTN"
+                app:srcCompat="@drawable/ic_baseline_folder_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/addBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_button"
+                android:contentDescription="@string/hint_add_BTN"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_baseline_add_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/chatBTN"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="@string/hint_chat_BTN"
+                app:srcCompat="@drawable/ic_chat_svgrepo_com"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/tasksBTN"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:contentDescription="@string/hint_tasks_BTN"
+                app:srcCompat="@drawable/ic_baseline_assignment_24"
+                tools:ignore="VectorDrawableCompat" />
+        </LinearLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     <TextView
         android:id="@+id/nombreSalonTV"
         android:layout_width="0dp"
@@ -14,81 +89,11 @@
         android:background="#336A99"
         android:gravity="bottom|center|center_vertical"
         android:paddingBottom="10dp"
-        android:text="Programacion Orientada a Objetos"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <LinearLayout
-        android:id="@+id/actionBarDown"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#336A99"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/postsBTN"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:contentDescription="@string/hint_posts_BTN"
-            app:srcCompat="@drawable/ic_baseline_list_alt_24"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageButton
-            android:id="@+id/filesBTN"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:contentDescription="@string/hint_files_BTN"
-            app:srcCompat="@drawable/ic_baseline_folder_24"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageButton
-            android:id="@+id/addBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circle_button"
-            android:contentDescription="@string/hint_add_BTN"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageButton
-            android:id="@+id/chatBTN"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:contentDescription="@string/hint_chat_BTN"
-            app:srcCompat="@drawable/ic_chat_svgrepo_com"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageButton
-            android:id="@+id/tasksBTN"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#00000000"
-            android:contentDescription="@string/hint_tasks_BTN"
-            app:srcCompat="@drawable/ic_baseline_assignment_24"
-            tools:ignore="VectorDrawableCompat" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/actionBarDown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreSalonTV"
-        app:layout_constraintVertical_bias="0.478"
-        tools:listitem="@layout/post_preview"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
