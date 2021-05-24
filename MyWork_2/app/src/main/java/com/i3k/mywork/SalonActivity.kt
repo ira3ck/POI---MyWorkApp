@@ -34,10 +34,10 @@ class SalonActivity : AppCompatActivity() {
         val chatBTN = findViewById<ImageButton>(R.id.chatBTN)
         val postsBTN = findViewById<ImageButton>(R.id.postsBTN)
 
-        cambiarFragmento(fragment_posts(), "fragment_posts")
+        cambiarFragmento(post_fragment(), "fragment_posts")
 
         postsBTN.setOnClickListener {
-            cambiarFragmento(fragment_posts(), "fragment_posts")
+            cambiarFragmento(post_fragment(), "fragment_posts")
         }
 
         filesBTN.setOnClickListener {

@@ -30,13 +30,13 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/postUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/prev_post_author" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/postNivel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/prev_post_author_rank"
@@ -45,7 +45,7 @@
     </TableRow>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/postTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -55,9 +55,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/postContenido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="3"
         android:text="@string/prev_post_content" />
 
 </LinearLayout>
