@@ -13,34 +13,13 @@ import com.i3k.mywork.modelos.Mensaje
 import kotlinx.android.synthetic.main.contacto_individuo.view.*
 
 
-class ContactAdapter(val listaContactos : MutableList<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(val listaContactos : MutableList<Contact>) : RecyclerView.Adapter<ContactAdapter.ContactoViewHolder>() {
 
-    ///////-- DATOS (INICIO) --/////////
+    class ContactoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-    private val kode = arrayOf("d116df5",
-            "36ffc75", "f5cfe78", "5b87628",
-            "db8d14e", "9913dc4", "e120f96",
-            "466251b")
-
-    private val kategori = arrayOf("Kekayaan", "Teknologi",
-            "Keluarga", "Bisnis",
-            "Keluarga", "Hutang",
-            "Teknologi", "Pidana")
-
-    private val isi = arrayOf("pertanyaan 9",
-            "pertanyaan 11", "pertanyaan 17", "test forum",
-            "pertanyaan 12", "pertanyaan 18", "pertanyaan 20",
-            "pertanyaan 21")
-
-    ///////-- DATOS (FIN) --/////////
-
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-        var contactName: TextView
-        var contactID: TextView
-
-        init {
+        fun asignarInformacion(ContactTemp: Contact){
+            var contactName: TextView
+            var contactID: TextView
             contactName = itemView.findViewById<TextView>(R.id.contactNameTV)
             contactID = itemView.findViewById<TextView>(R.id.contactID)
 
@@ -53,23 +32,20 @@ class ContactAdapter(val listaContactos : MutableList<Contact>) : RecyclerView.A
 
                 context.startActivity(intent)
             }
+            itemView.contactNameTV.text = ContactTemp.username
+            itemView.contactID.text = ContactTemp.id
         }
     }
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val v = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.contacto_individuo, viewGroup, false)
-        return ViewHolder(v)
-    }
-
-    override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        //viewHolder.contactName.text = kode[i]
-        viewHolder.contactName.text = listaContactos[i].username
-        viewHolder.contactID.text = listaContactos[i].id
-    }
-
     override fun getItemCount(): Int {
-        return kode.size
+        return listaContactos.size
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ContactoViewHolder {
+        return ContactAdapter.ContactoViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.contacto_individuo, parent, false)
+        )
+    }
+    override fun onBindViewHolder(holder: ContactAdapter.ContactoViewHolder, position: Int) {
+        holder.asignarInformacion(listaContactos[position])
     }
 
 }

@@ -11,15 +11,11 @@ import com.google.firebase.database.*
 import com.i3k.mywork.R
 import com.i3k.mywork.adaptadores.ContactAdapter
 import com.i3k.mywork.modelos.Contact
-import com.i3k.mywork.modelos.Mensaje
-import kotlinx.android.synthetic.main.contact_layout.*
 
 class contactos_fragment() : Fragment() {
-    private var layout: RecyclerView.LayoutManager? = null
-    private var adaptador: RecyclerView.Adapter<ContactAdapter.ViewHolder>? = null
-    var fragmentView : View? = null
-    private var database : FirebaseDatabase? = null
-    private var usersRef : DatabaseReference? = null
+    private lateinit var adaptador: ContactAdapter
+    private val database = FirebaseDatabase.getInstance()
+    private lateinit var usersRef : DatabaseReference
     var listaContactos = mutableListOf<Contact>()
 
 
@@ -28,15 +24,21 @@ class contactos_fragment() : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        fragmentView =  inflater.inflate(R.layout.contact_layout, container, false)
+        var fragmentView =  inflater.inflate(R.layout.contact_layout, container, false)
 
-        database = FirebaseDatabase.getInstance()
-        usersRef = FirebaseDatabase.getInstance().getReference("users")
+        val recyclerView :RecyclerView = fragmentView.findViewById(R.id.contactosRV)
 
-        usersRef?.addValueEventListener(object : ValueEventListener {
+        adaptador = ContactAdapter(listaContactos)
+
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adaptador
+
+        usersRef = database.getReference("users")
+
+        usersRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue(Contact::class.java)
 
                 for (sp in dataSnapshot.children){
                     val username = sp.child("username").getValue()
@@ -46,14 +48,18 @@ class contactos_fragment() : Fragment() {
                     listaContactos.add(Contact(text2, text1))
                 }
 
+                if (listaContactos.size > 0){
+                    adaptador.notifyDataSetChanged()
+                    //recyclerView.smoothScrollToPosition(listaContactos.size - 1)
+                }
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
                 //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
-        }
-        )
+        })
 
         return fragmentView
 
@@ -61,12 +67,16 @@ class contactos_fragment() : Fragment() {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
-        contactosRV.apply {
+        /*contactosRV.apply {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
             layout = LinearLayoutManager(activity)
             // set the custom adapter to the RecyclerView
             adaptador = ContactAdapter(listaContactos)
-        }
+        }*/
+        /*layout = LinearLayoutManager(activity)
+        adaptador = ContactAdapter(listaContactos)
+        contactosRV.layoutManager = layout
+        contactosRV.adapter = adaptador*/
     }
 }

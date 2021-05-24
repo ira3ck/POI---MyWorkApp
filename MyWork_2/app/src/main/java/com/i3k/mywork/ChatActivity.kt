@@ -73,7 +73,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
 
-            val postListener = object :ValueEventListener {
+        val postListener = object :ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val post = snapshot.getValue(Mensaje::class.java)
 
