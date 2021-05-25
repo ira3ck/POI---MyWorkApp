@@ -14,11 +14,12 @@ import com.i3k.mywork.adaptadores.PostAdapter
 import com.i3k.mywork.modelos.Contact
 import com.i3k.mywork.modelos.Post
 
-class post_fragment() : Fragment() {
+class post_fragment(grupoID : String) : Fragment() {
     private lateinit var adaptador: PostAdapter
     private val database = FirebaseDatabase.getInstance()
     private lateinit var postRef : DatabaseReference
     var listaPost = mutableListOf<Post>()
+    private val grupo = grupoID
 
 
     override fun onCreateView(
@@ -36,17 +37,17 @@ class post_fragment() : Fragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adaptador
 
-        postRef = database.getReference("groups/LMAD")
+        postRef = database.getReference("groups/$grupo/posts")
         var userNom : String
 
         postRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+                listaPost.clear()
                 for (sp in dataSnapshot.children){
-                    val autor = sp.child("usuario").getValue()
-                    val nivel = sp.child("timestamp").getValue()
-                    val titulo = sp.child("title").getValue()
-                    val contenido = sp.child("content").getValue()
+                    val autor = sp.child("postUser").getValue()
+                    val nivel = sp.child("postTime").getValue()
+                    val titulo = sp.child("postTitulo").getValue()
+                    val contenido = sp.child("postContenido").getValue()
                     val text1 = autor.toString()
                     val text2 = nivel.toString()
                     val text3 = titulo.toString()

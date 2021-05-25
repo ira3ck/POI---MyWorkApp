@@ -1,15 +1,11 @@
 package com.i3k.mywork.adaptadores
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.i3k.mywork.MostrarActivity
 import com.i3k.mywork.R
 import com.i3k.mywork.modelos.Post
-import kotlinx.android.synthetic.main.contacto_individuo.view.*
 import kotlinx.android.synthetic.main.post_preview.view.*
 
 
@@ -20,7 +16,7 @@ class PostAdapter(val listaPost: MutableList<Post>) : RecyclerView.Adapter<PostA
         fun asignarInformacion(postTemp: Post){
 
             itemView.postUsuario.text = postTemp.postUser
-            itemView.postNivel.text = postTemp.postNivel
+            itemView.postNivel.text = postTemp.postTime
             itemView.postTitulo.text = postTemp.postTitulo
             itemView.postContenido.text = postTemp.postContenido
         }
