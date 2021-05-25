@@ -51,10 +51,13 @@ class contactos_config_fragment(username : String, userID : String, grupoID : St
                         procede = false
                     }
                     val ayDi = sp.child("id").getValue()
+                    var estatus = sp.child("status").getValue().toString()
+                    if(estatus.equals("null"))
+                        estatus ="Invisible"
                     val text1 = username.toString()
                     val text2 = ayDi.toString()
                     if(procede){
-                        listaContactos.add(Contact(text2, text1))
+                        listaContactos.add(Contact(text2, text1, estatus))
                     }
                 }
 

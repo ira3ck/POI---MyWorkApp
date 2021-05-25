@@ -1,64 +1,53 @@
 package com.i3k.mywork
 
-import android.os.Build
+import android.content.res.Configuration
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
-import com.i3k.mywork.adaptadores.ChatAdapter
-import com.i3k.mywork.modelos.Mensaje
+import com.i3k.mywork.modelos.User
+import kotlinx.android.synthetic.main.activity_profile_config.*
 
 
 class ProfileConfigActivity : AppCompatActivity() {
 
     private lateinit var username: String
     private lateinit var userID: String
-    private lateinit var username2: String
-    private lateinit var userID2: String
-    private lateinit var modo: String
-    private lateinit var groupID: String
-    private lateinit var groupName: String
-
-    private val listaMensaje = mutableListOf<Mensaje>()
-    private lateinit var adaptador : ChatAdapter
 
     private val database = FirebaseDatabase.getInstance()
-    private lateinit var chatsRef : DatabaseReference
+    private lateinit var userRef : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_config)
 
+        if(resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES){
+            profileNameTB.setBackgroundResource(R.drawable.message_container_dark)
+        }
+
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
 
-        /*var idText = findViewById<TextView>(R.id.idUserText)
+        userRef = database.getReference("users/$userID")
 
-        if (modo.equals("solo")){
-            var uniqueChatRef = mutableListOf(userID, userID2)
-            uniqueChatRef.sort()
-            chatsRef = database.getReference("chats/"+uniqueChatRef[0]+uniqueChatRef[1])
+        updateProfileNameBTN.setOnClickListener {
+            updateUser()
+            Toast.makeText(this, "Nombre Actualizado", Toast.LENGTH_SHORT).show()
 
-            idText.text = username2
         }
-        else {
-            chatsRef = database.getReference("chats/$groupID")
-
-            idText.text = "Chat $groupName"
-        }*/
 
     }
 
-    private fun sendMessage(mensaje: Mensaje){
-        val mensajeFirebase = chatsRef.push()
-        mensaje.id = mensajeFirebase.key ?: ""
-        mensajeFirebase.setValue(mensaje)
+    fun toMap(): Map<String, Any> {
+        val result: HashMap<String, Any> = HashMap()
+        result["nombre"] = profileNameTB.text.toString()
+        return result
     }
+
+    private fun updateUser() {
+        val postValues: Map<String, Any> = toMap()
+        userRef.updateChildren(postValues)
+    }
+
 
 }
