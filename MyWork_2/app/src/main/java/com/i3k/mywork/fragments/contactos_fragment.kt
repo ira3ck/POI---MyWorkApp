@@ -12,11 +12,13 @@ import com.i3k.mywork.R
 import com.i3k.mywork.adaptadores.ContactAdapter
 import com.i3k.mywork.modelos.Contact
 
-class contactos_fragment() : Fragment() {
+class contactos_fragment(username : String, userID : String) : Fragment() {
     private lateinit var adaptador: ContactAdapter
     private val database = FirebaseDatabase.getInstance()
     private lateinit var usersRef : DatabaseReference
     var listaContactos = mutableListOf<Contact>()
+    private val usuario = username
+    private val ayDi = userID
 
 
     override fun onCreateView(
@@ -28,7 +30,7 @@ class contactos_fragment() : Fragment() {
 
         val recyclerView :RecyclerView = fragmentView.findViewById(R.id.contactosRV)
 
-        adaptador = ContactAdapter(listaContactos)
+        adaptador = ContactAdapter(listaContactos, usuario, ayDi)
 
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager

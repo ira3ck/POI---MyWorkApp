@@ -26,12 +26,12 @@ class ContactsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_contacts)
+        setContentView(R.layout.contact_layout)
 
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
 
-        val recyclerView : RecyclerView = findViewById(R.id.ContactsRV)
+        val recyclerView : RecyclerView = findViewById(R.id.contactosRV)
 
         //adaptador = ContactAdapter(listaContactos)
 

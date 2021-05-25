@@ -18,6 +18,16 @@
     <string name="hint_user_to_chat">Busca una persona</string>
     <string name="hint_type">Escribe tu mensaje...</string>
 
+    <string name="post_title">Nueva Publicación</string>
+    <string name="post_title_TB">Título</string>
+    <string name="post_content_TB">Contenido</string>
+    <string name="hint_title_post">Título de la publicación</string>
+    <string name="hint_content_post">Compártenos algo...</string>
+
+    <string name="salon_title">Nuevo Salón</string>
+    <string name="salon_name_TB">Nombre del salón</string>
+    <string name="hint_name_salon">Salón...</string>
+
     <string name="img_desc">Fotografía de perfil</string>
     <string name="icon_desc_folder">Ícono de carpeta</string>
 

@@ -1,6 +1,9 @@
 package com.i3k.mywork
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +31,6 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat)
 
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
@@ -51,7 +53,7 @@ class ChatActivity : AppCompatActivity() {
             idText.text = "Todos"
         }
 
-
+        var userFromDatabase = FirebaseDatabase.getInstance().getReference("users/smjfghsjydfgcjmAYDFCJ").child("username")
 
         val recyclerView :RecyclerView = findViewById(R.id.chatRV)
 

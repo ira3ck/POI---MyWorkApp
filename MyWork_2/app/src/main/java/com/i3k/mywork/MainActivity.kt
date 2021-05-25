@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                             correcto = true
                             errorTxt = ""
 
-                            val intent = Intent(this@MainActivity, SalonActivity::class.java)
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
 
                             intent.putExtra("username", userAdecuado.toString())
                             intent.putExtra("userID", userID)

@@ -11,6 +11,7 @@
         android:theme="@style/Theme.MyWork">
         <activity android:name=".SalonActivity"></activity>
         <activity android:name=".ChatActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".MostrarActivity" />

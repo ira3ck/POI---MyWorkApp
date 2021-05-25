@@ -1,13 +1,11 @@
 package com.i3k.mywork
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.firebase.database.*
-import com.i3k.mywork.fragments.*
-import com.i3k.mywork.modelos.Contact
+import com.i3k.mywork.fragments.contactos_fragment
 import kotlinx.android.synthetic.main.activity_salon.*
 
 class SalonActivity : AppCompatActivity() {
@@ -22,6 +20,12 @@ class SalonActivity : AppCompatActivity() {
         }
     }
 
+    private fun setLYheight(view: View, height: Int) {
+        val params = view.layoutParams
+        params.height = height
+        view.layoutParams = params
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_salon)
@@ -31,27 +35,40 @@ class SalonActivity : AppCompatActivity() {
 
         nombreSalonTV.text = username
 
+
         val chatBTN = findViewById<ImageButton>(R.id.chatBTN)
         val postsBTN = findViewById<ImageButton>(R.id.postsBTN)
+        setLYheight(PostLY, 0)
 
-        cambiarFragmento(fragment_posts(), "fragment_posts")
+        addBTN.setOnClickListener {
+            setLYheight(PostLY, 1000)
+            addBTN.setImageResource(R.drawable.ic_baseline_check_circle_outline_24)
+        }
+        closeBTN.setOnClickListener {
+            setLYheight(PostLY, 0)
+            addBTN.setImageResource(R.drawable.ic_baseline_add_24)
+        }
+
+        cambiarFragmento(contactos_fragment(username, userID), "fragment_posts")
 
         postsBTN.setOnClickListener {
-            cambiarFragmento(fragment_posts(), "fragment_posts")
+            //cambiarFragmento(fragment_posts(), "fragment_posts")
         }
 
         filesBTN.setOnClickListener {
-            cambiarFragmento(fragment_files(), "fragment_files")
+            //cambiarFragmento(fragment_files(), "fragment_files")
         }
 
         chatBTN.setOnClickListener {
-            cambiarFragmento(contactos_fragment(), "contact_layout")
+            cambiarFragmento(contactos_fragment(username, userID), "contact_layout")
         }
 
         tasksBTN.setOnClickListener {
-            cambiarFragmento(fragment_tasks(), "fragment_contacts")
+            //ambiarFragmento(fragment_tasks(), "fragment_contacts")
         }
 
 
     }
+
+
 }
