@@ -5,13 +5,16 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.i3k.mywork.fragments.contactos_config_fragment
 import com.i3k.mywork.fragments.contactos_fragment
+import com.i3k.mywork.fragments.post_fragment
 import kotlinx.android.synthetic.main.activity_salon.*
 
 class SalonActivity : AppCompatActivity() {
 
     private lateinit var username: String
     private lateinit var userID: String
+    private lateinit var grupoID: String
 
     fun cambiarFragmento(fragmentoNuevo: Fragment, tag: String){
         val fragmentoAnterior = supportFragmentManager.findFragmentByTag(tag)
@@ -32,6 +35,7 @@ class SalonActivity : AppCompatActivity() {
 
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
+        grupoID = intent.getStringExtra("groupID") ?: "AAAAAAAAAAAAAAAAAAAA"
 
         nombreSalonTV.text = username
 
@@ -49,10 +53,10 @@ class SalonActivity : AppCompatActivity() {
             addBTN.setImageResource(R.drawable.ic_baseline_add_24)
         }
 
-        cambiarFragmento(contactos_fragment(username, userID), "fragment_posts")
+        cambiarFragmento(post_fragment(), "fragment_posts")
 
         postsBTN.setOnClickListener {
-            //cambiarFragmento(fragment_posts(), "fragment_posts")
+            cambiarFragmento(post_fragment(), "fragment_posts")
         }
 
         filesBTN.setOnClickListener {
@@ -64,7 +68,7 @@ class SalonActivity : AppCompatActivity() {
         }
 
         tasksBTN.setOnClickListener {
-            //ambiarFragmento(fragment_tasks(), "fragment_contacts")
+            cambiarFragmento(contactos_config_fragment(username, userID, grupoID), "fragment_salon_config")
         }
 
 

@@ -31,6 +31,7 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_chat)
 
         username = intent.getStringExtra("username") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID = intent.getStringExtra("userID") ?: "AAAAAAAAAAAAAAAAAAAA"
