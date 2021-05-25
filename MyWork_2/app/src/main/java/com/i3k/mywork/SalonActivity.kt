@@ -101,11 +101,11 @@ class SalonActivity : AppCompatActivity() {
             //addBTN.setImageResource(R.drawable.ic_baseline_add_24)
         }
 
-        cambiarFragmento(post_fragment(), "fragment_posts")
+        cambiarFragmento(post_fragment(grupoID), "fragment_posts")
         postsBTN.setBackgroundColor(0x10FFFFFF.toInt())
 
         postsBTN.setOnClickListener {
-            cambiarFragmento(post_fragment(), "fragment_posts")
+            cambiarFragmento(post_fragment(grupoID), "fragment_posts")
             transparentar()
             postsBTN.setBackgroundColor(0x10FFFFFF.toInt())
         }
