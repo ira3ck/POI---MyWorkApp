@@ -1,13 +1,19 @@
 package com.i3k.mywork
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
@@ -129,12 +135,72 @@ class ChatActivity : AppCompatActivity() {
         }
 
         chatsRef.addValueEventListener(postListener)
+
+        findViewById<Button>(R.id.btnLocalizacion).setOnClickListener {
+
+            revisarPermisos()
+        }
     }
 
     private fun sendMessage(mensaje: Mensaje){
         val mensajeFirebase = chatsRef.push()
         mensaje.id = mensajeFirebase.key ?: ""
         mensajeFirebase.setValue(mensaje)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK){
+            val direccionSeleccionada = data?.getStringExtra("ubicacion")
+            findViewById<TextView>(R.id.typeMesTV).text = direccionSeleccionada
+
+        } else{
+            findViewById<TextView>(R.id.typeMesTV).text = "no seleccionaste direcion"
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.isNotEmpty()) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Se requiere aceptar el permiso", Toast.LENGTH_SHORT).show()
+                revisarPermisos()
+            } else {
+                Toast.makeText(this, "Permisio concedido", Toast.LENGTH_SHORT).show()
+                abrirMapa()
+            }
+        }
+    }
+
+    private fun abrirMapa() {
+
+        startActivityForResult(Intent(this, MapsActivity::class.java),1)
+    }
+
+    private fun revisarPermisos() {
+        // Apartir de Android 6.0+ necesitamos pedir el permiso de ubicacion
+        // directamente en tiempo de ejecucion de la app
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Si no tenemos permiso para la ubicacion
+            // Solicitamos permiso
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                1
+            )
+        } else {
+            // Ya se han concedido los permisos anteriormente
+            abrirMapa()
+        }
     }
 
 }
