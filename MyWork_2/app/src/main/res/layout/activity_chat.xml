@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#00FFFFFF"
     android:orientation="vertical"
     tools:context=".ChatActivity">
 
@@ -12,7 +12,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="#336A99"
+        android:background="@color/rojo"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,10 +65,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#336A99"
+        android:layout_height="wrap_content"
+        android:background="@color/rojo"
         android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -76,14 +78,18 @@
         <EditText
             android:id="@+id/typeMesTV"
             android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/message_container"
             android:ems="10"
             android:hint="@string/hint_mensaje"
             android:importantForAutofill="no"
-            android:inputType="none"
+            android:inputType="none|textMultiLine|text"
+            android:maxLines="4"
             android:paddingLeft="20dp"
+            android:paddingTop="5dp"
             android:paddingRight="20dp"
+            android:paddingBottom="5dp"
+            android:singleLine="false"
             android:textColor="#808080"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sendBTN"
@@ -94,16 +100,16 @@
 
         <ImageButton
             android:id="@+id/sendBTN"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/circle_button"
             android:contentDescription="@string/send_access"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/typeMesTV"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_send_24"
             tools:ignore="VectorDrawableCompat" />
     </androidx.constraintlayout.widget.ConstraintLayout>

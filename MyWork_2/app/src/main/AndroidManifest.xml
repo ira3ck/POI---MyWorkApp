@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWork">
-        <activity android:name=".SalonActivity"></activity>
+        <activity android:name=".SalonActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".ChatActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity" android:screenOrientation="portrait"/>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".ProfileConfigActivity" />
         <activity android:name=".ContactsActivity" />
         <activity android:name=".MostrarActivity" />
         <activity android:name=".HubActivity" />

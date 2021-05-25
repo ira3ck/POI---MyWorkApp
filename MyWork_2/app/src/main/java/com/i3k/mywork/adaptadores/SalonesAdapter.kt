@@ -40,6 +40,8 @@ class SalonesAdapter(val listaGrupo : MutableList<Grupo>, username : String, use
                 intent.putExtra("username", usuario)
                 intent.putExtra("userID", ayDi)
                 intent.putExtra("groupID", groupID.text)
+                intent.putExtra("groupName", groupName.text)
+                intent.putExtra("maestro", maestroName.text)
 
                 context.startActivity(intent)
             }

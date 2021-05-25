@@ -41,6 +41,41 @@ class grupos_fragment(username : String, userID : String) : Fragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adaptador
 
+        val grupos2 = groupRef
+        val valueEventListener2 = object : ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children){
+                    var procede = false
+                    var miembros = ds.child("members").children
+                    for (nds in miembros){
+                        if(nds.child("username").getValue().toString() == usuario){
+                            procede = true
+                            break
+                        }
+                    }
+                    val nomb = ds.child("nombre").getValue().toString()
+                    val maestro = ds.child("maestro").getValue().toString()
+                    val maestroID = ds.child("maestroID").getValue().toString()
+                    val ayDi = ds.child("id").getValue().toString()
+
+                    if(procede){
+                        listaGrupo.add(Grupo(ayDi, nomb, maestro, maestroID))
+                    }
+                }
+
+                if (listaGrupo.size > 0){
+                    adaptador.notifyDataSetChanged()
+                    //recyclerView.smoothScrollToPosition(listaContactos.size - 1)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //correcto = false
+            }
+        }
+        grupos2.addListenerForSingleValueEvent(valueEventListener2)
+
         val grupos = groupRef.orderByChild("maestroID").equalTo(ayDi)
         val valueEventListener = object : ValueEventListener{
 

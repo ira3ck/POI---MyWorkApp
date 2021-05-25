@@ -1,6 +1,7 @@
 package com.i3k.mywork
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -11,7 +12,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.i3k.mywork.adaptadores.SalonesAdapter
 import com.i3k.mywork.fragments.contactos_fragment
 import com.i3k.mywork.fragments.grupos_fragment
+import com.i3k.mywork.fragments.perfil_fragment
 import com.i3k.mywork.modelos.Grupo
+import kotlinx.android.synthetic.main.activity_salon.*
 import kotlinx.android.synthetic.main.principal_activity.*
 
 class HomeActivity : AppCompatActivity() {
@@ -74,21 +77,33 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cambiarFragmento(grupos_fragment(username, userID), "principal_activity")
+        homeBTN.setBackgroundColor(0x10FFFFFF.toInt())
 
         homeBTN.setOnClickListener {
             cambiarFragmento(grupos_fragment(username, userID), "principal_activity")
+            transparentar()
+            homeBTN.setBackgroundColor(0x10FFFFFF.toInt())
         }
 
         guauBTN.setOnClickListener {
             //cambiarFragmento(fragment_files(), "fragment_files")
+            guauBTN.setBackgroundColor(0x10FFFFFF.toInt())
+            Toast.makeText(this, "GUAU", Toast.LENGTH_SHORT).show()
+            Handler().postDelayed({
+                guauBTN.setBackgroundColor(0x00FFFFFF.toInt())
+            }, 600)
         }
 
         dmBTN.setOnClickListener {
             //cambiarFragmento(contactos_fragment(username, userID), "contact_layout")
+            transparentar()
+            dmBTN.setBackgroundColor(0x10FFFFFF.toInt())
         }
 
         profileBTN.setOnClickListener {
-            //(fragment_tasks(), "fragment_contacts")
+            cambiarFragmento(perfil_fragment(username, userID), "fragment_profile")
+            transparentar()
+            profileBTN.setBackgroundColor(0x10FFFFFF.toInt())
         }
 
 
@@ -98,6 +113,13 @@ class HomeActivity : AppCompatActivity() {
         val regisUser = grupoRef.push()
         grupo.id = regisUser.key ?: ""
         regisUser.setValue(grupo)
+    }
+
+    fun transparentar(){
+        homeBTN.setBackgroundColor(0x00FFFFFF.toInt())
+        guauBTN.setBackgroundColor(0x00FFFFFF.toInt())
+        dmBTN.setBackgroundColor(0x00FFFFFF.toInt())
+        profileBTN.setBackgroundColor(0x00FFFFFF.toInt())
     }
 
 }

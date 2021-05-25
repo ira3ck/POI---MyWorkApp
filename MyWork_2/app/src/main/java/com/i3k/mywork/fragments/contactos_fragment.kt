@@ -1,5 +1,6 @@
 package com.i3k.mywork.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.i3k.mywork.ChatActivity
 import com.i3k.mywork.R
 import com.i3k.mywork.adaptadores.ContactAdapter
 import com.i3k.mywork.modelos.Contact
+import kotlinx.android.synthetic.main.contact_layout.*
+import kotlinx.android.synthetic.main.contact_layout.view.*
 
-class contactos_fragment(username : String, userID : String) : Fragment() {
+class contactos_fragment(username : String, userID : String, groupID : String, groupName : String) : Fragment() {
     private lateinit var adaptador: ContactAdapter
     private val database = FirebaseDatabase.getInstance()
     private lateinit var usersRef : DatabaseReference
     var listaContactos = mutableListOf<Contact>()
     private val usuario = username
     private val ayDi = userID
+    private val grupoID = groupID
+    private val grupoName = groupName
 
 
     override fun onCreateView(
@@ -62,6 +68,18 @@ class contactos_fragment(username : String, userID : String) : Fragment() {
                 //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         })
+
+        fragmentView.salonChatBTN.setOnClickListener { view->
+            val intent = Intent(activity, ChatActivity::class.java)
+
+            intent.putExtra("username", usuario)
+            intent.putExtra("userID", ayDi)
+            intent.putExtra("groupID", grupoID)
+            intent.putExtra("groupName", grupoName)
+            intent.putExtra("modo", "todo")
+
+            startActivity(intent)
+        }
 
         return fragmentView
 

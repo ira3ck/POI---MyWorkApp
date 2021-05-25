@@ -22,6 +22,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var username2: String
     private lateinit var userID2: String
     private lateinit var modo: String
+    private lateinit var groupID: String
+    private lateinit var groupName: String
 
     private val listaMensaje = mutableListOf<Mensaje>()
     private lateinit var adaptador : ChatAdapter
@@ -38,6 +40,8 @@ class ChatActivity : AppCompatActivity() {
         username2 = intent.getStringExtra("username2") ?: "AAAAAAAAAAAAAAAAAAAA"
         userID2 = intent.getStringExtra("userID2") ?: "AAAAAAAAAAAAAAAAAAAA"
         modo = intent.getStringExtra("modo") ?: "AAAAAAAAAAAAAAAAAAAA"
+        groupID = intent.getStringExtra("groupID") ?: "AAAAAAAAAAAAAAAAAAAA"
+        groupName = intent.getStringExtra("groupName") ?: "AAAAAAAAAAAAAAAAAAAA"
 
         var idText = findViewById<TextView>(R.id.idUserText)
 
@@ -49,12 +53,10 @@ class ChatActivity : AppCompatActivity() {
             idText.text = username2
         }
         else {
-            chatsRef = database.getReference("chats/theWorld")
+            chatsRef = database.getReference("chats/$groupID")
 
-            idText.text = "Todos"
+            idText.text = "Chat $groupName"
         }
-
-        var userFromDatabase = FirebaseDatabase.getInstance().getReference("users/smjfghsjydfgcjmAYDFCJ").child("username")
 
         val recyclerView :RecyclerView = findViewById(R.id.chatRV)
 

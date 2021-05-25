@@ -40,23 +40,26 @@ class contactos_config_fragment(username : String, userID : String, grupoID : St
         recyclerView.adapter = adaptador
 
 
-        usersRef = database.getReference("users")
+        var query = database.getReference("users").orderByChild("username")
 
-        usersRef.addValueEventListener(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-
                 for (sp in dataSnapshot.children){
+                    var procede = true
                     val username = sp.child("username").getValue()
+                    if(username == usuario){
+                        procede = false
+                    }
                     val ayDi = sp.child("id").getValue()
                     val text1 = username.toString()
                     val text2 = ayDi.toString()
-                    listaContactos.add(Contact(text2, text1))
+                    if(procede){
+                        listaContactos.add(Contact(text2, text1))
+                    }
                 }
 
                 if (listaContactos.size > 0){
                     adaptador.notifyDataSetChanged()
-                    //recyclerView.smoothScrollToPosition(listaContactos.size - 1)
                 }
 
             }

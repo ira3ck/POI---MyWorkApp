@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="?attr/colorOnPrimary"
     tools:context=".SalonActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,7 +84,7 @@
             android:id="@+id/actionBarDown"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#AE4265"
+            android:background="@color/rojo"
             android:gravity="center"
             android:orientation="horizontal">
 
