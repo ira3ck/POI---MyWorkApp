@@ -51,9 +51,12 @@ class contactos_fragment(username : String, userID : String, groupID : String, g
                 for (sp in dataSnapshot.children){
                     val username = sp.child("username").getValue()
                     val ayDi = sp.child("id").getValue()
+                    var estatus = sp.child("status").getValue().toString()
+                    if(estatus.equals("null"))
+                        estatus ="Invisible"
                     val text1 = username.toString()
                     val text2 = ayDi.toString()
-                    listaContactos.add(Contact(text2, text1))
+                    listaContactos.add(Contact(text2, text1, estatus))
                 }
 
                 if (listaContactos.size > 0){

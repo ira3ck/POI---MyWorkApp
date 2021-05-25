@@ -4,18 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.media.VolumeShaper
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.i3k.mywork.modelos.User
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.in_ses.*
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,9 +31,39 @@ class MainActivity : AppCompatActivity() {
         val usuarioText = findViewById<TextView>(R.id.usernameTB)
         val contraText = findViewById<TextView>(R.id.passwordTB)
 
-        val contexto = this
+        if(fileExists(this@MainActivity, "alwaysRember")){
+
+            var username : String
+            var userID : String
+
+            var fileInputStream: FileInputStream? = null
+            fileInputStream = openFileInput("alwaysRember")
+            var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
+            val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
+            val stringBuilder: StringBuilder = StringBuilder()
+            var text: String? = null
+            while ({ text = bufferedReader.readLine(); text }() != null) {
+                stringBuilder.append(text)
+            }
+            var bil = stringBuilder.toString()
+            username = bil.substring(0, bil.length - 20)
+            userID = bil.substring(username.length)
+
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+
+            intent.putExtra("username", username)
+            intent.putExtra("userID", userID)
+
+            startActivity(intent)
+        }
+
         var correcto = true
-        val listaErrores = arrayOf("Introduzca un nombre de usuario. ", "Introduzca una contraseña. ", "Usuario o Contraseña incorrecta. ", "Estamos experimentando con problemas en la Base de Datos. ")
+        val listaErrores = arrayOf(
+            "Introduzca un nombre de usuario. ",
+            "Introduzca una contraseña. ",
+            "Usuario o Contraseña incorrecta. ",
+            "Estamos experimentando con problemas en la Base de Datos. "
+        )
         var errorTxt = ""
 
         //Esto es para revisar si está en modo nocturno
@@ -80,6 +108,24 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("username", userAdecuado.toString())
                             intent.putExtra("userID", userID)
 
+                            updateUser("Conectado", database.getReference("users/$userID"))
+
+                            if (rememberBTN.isChecked){
+                                val file:String = "alwaysRember"
+                                val uswarovski:String = userAdecuado.toString()
+                                val fileOutputStream: FileOutputStream
+                                try {
+                                    fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
+                                    fileOutputStream.write(uswarovski.toByteArray())
+                                    fileOutputStream.write(userID.toByteArray())
+                                }catch (e: Exception){
+                                    e.printStackTrace()
+                                }
+                            }
+                            else{
+                                deleteFile("alwaysRember")
+                            }
+
                             startActivity(intent)
 
                         }
@@ -114,6 +160,31 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun toMap(texto: String): Map<String, Any> {
+        val result: HashMap<String, Any> = HashMap()
+        result["status"] = texto
+        return result
+    }
+
+    private fun updateUser(texto: String, usRef: DatabaseReference) {
+        val postValues: Map<String, Any> = toMap(texto)
+        usRef.updateChildren(postValues)
+    }
+
+    fun fileExists(context: Context, filename: String?): Boolean {
+        val file = context.getFileStreamPath(filename)
+        return if (file == null || !file.exists()) {
+            false
+        } else true
+    }
+
+    fun deleteFile(context: Context, filename: String?) {
+        val file = context.getFileStreamPath(filename)
+        if(file.exists()){
+            file.delete()
+        }
     }
 
 }

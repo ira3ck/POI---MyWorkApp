@@ -28,8 +28,10 @@ class ContactFoundAdapter(val listaContactos : MutableList<Contact>, username : 
         fun asignarInformacion(ContactTemp: Contact){
             var contactName: TextView
             var contactID: TextView
+            var contactStatus: TextView
             contactName = itemView.findViewById<TextView>(R.id.contactNameTV)
             contactID = itemView.findViewById<TextView>(R.id.contactID)
+            contactStatus = itemView.findViewById<TextView>(R.id.contactStatus)
 
             itemView.setOnClickListener {
                 var position: Int = getAdapterPosition()
@@ -45,6 +47,7 @@ class ContactFoundAdapter(val listaContactos : MutableList<Contact>, username : 
             }
             itemView.contactNameTV.text = ContactTemp.username
             itemView.contactID.text = ContactTemp.id
+            itemView.contactStatus.text = ContactTemp.status
         }
     }
     override fun getItemCount(): Int {

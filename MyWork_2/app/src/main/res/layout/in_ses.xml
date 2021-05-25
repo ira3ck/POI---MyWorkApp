@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/usernameTB"
@@ -25,7 +24,6 @@
         android:id="@+id/inSesBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/in_ses_BTN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.59" />
 
     <Button
         android:id="@+id/regisBTN"
@@ -74,4 +72,26 @@
         app:layout_constraintBottom_toBottomOf="@+id/regisBTN"
         app:layout_constraintEnd_toStartOf="@+id/regisBTN"
         app:layout_constraintTop_toTopOf="@+id/regisBTN" />
+
+    <CheckBox
+        android:id="@+id/rememberBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="No cerrar sesión"
+        app:layout_constraintEnd_toEndOf="@+id/inSesBTN"
+        app:layout_constraintStart_toStartOf="@+id/inSesBTN"
+        app:layout_constraintTop_toBottomOf="@+id/inSesBTN" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="272dp"
+        android:layout_height="573dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/usernameTB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.494"
+        app:srcCompat="@drawable/mywork" />
 </androidx.constraintlayout.widget.ConstraintLayout>
